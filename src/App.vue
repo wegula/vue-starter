@@ -3,8 +3,7 @@
         <h1>Witaj w systemie do zapisów na zajęcia</h1>
 
         <div v-if="authenticatedUsername">
-            <h2>Witaj {{ authenticatedUsername }}</h2>
-            <a @click="logMeOut()">Wyloguj</a>
+            <user-panel :username="authenticatedUsername" @logout="logMeOut()"></user-panel>
         </div>
 
         <div v-else>
@@ -17,9 +16,10 @@
 <script>
     import "milligram";
     import LoginForm from "./LoginForm";
+    import UserPanel from "./UserPanel";
 
     export default {
-        components: {LoginForm},
+        components: {LoginForm, UserPanel},
         data() {
             return {
                 authenticatedUsername: '',
