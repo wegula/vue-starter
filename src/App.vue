@@ -1,20 +1,21 @@
 <template>
   <div>
-    <h1>Witaj w systemie zapisów na zajęcia</h1>
+
 
     <div v-if="authenticatedUsername">
-      <h3>Zalogowany jako: {{authenticatedUsername}}</h3>
-      <button @click="logMeOut()">Wyloguj</button>
+      <h1>System zapisów na zajęcia</h1>
+      <h3>Witaj {{authenticatedUsername}}!<button @click="logMeOut()">Wyloguj</button></h3>
+
     </div>
 
     <div v-else>
-      <p>Zaloguj się e-mailem
+      <h1>Witaj w systemie zapisów na zajęcia</h1>
+      <h3>Zaloguj się e-mailem
       <input type="email"
              v-model="email">
       <button @click="logMeIn()">Wchodzę</button>
-      </p>
+      </h3>
     </div>
-
 
   </div>
 
