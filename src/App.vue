@@ -26,7 +26,6 @@
         components: {LoginForm},
         data() {
             return {
-                email: '',
                 authenticatedUsername: ''
             };
         },
