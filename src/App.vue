@@ -3,9 +3,7 @@
 
         <div v-if="authenticatedUsername">
             <h1>System zapisów na zajęcia</h1>
-            <h3>Witaj {{authenticatedUsername}}!
-                <button @click="logMeOut()">Wyloguj</button>
-            </h3>
+            <user-panel :username="authenticatedUsername" @logout="logMeOut($event)"></user-panel>
 
         </div>
 
@@ -21,9 +19,10 @@
 <script>
     import "milligram";
     import LoginForm from "./LoginForm";
+    import UserPanel from "./UserPanel";
 
     export default {
-        components: {LoginForm},
+        components: {LoginForm, UserPanel},
         data() {
             return {
                 authenticatedUsername: ''
