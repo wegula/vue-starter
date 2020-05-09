@@ -6,6 +6,7 @@
         <label>Opis</label>
         <textarea v-model="newMeeting.description"></textarea>
         <button>Dodaj</button>
+        <label v-if="isNameCorrect === false">Spotkanie musi mieć nazwę!</label>
     </form>
 </template>
 
@@ -14,7 +15,7 @@
         data() {
             return {
                 newMeeting: {participants: []},
-                correctName: true
+                isNameCorrect: true
             };
         },
         methods: {
@@ -23,9 +24,9 @@
                     this.newMeeting.participants = [];
                     this.$emit('added', this.newMeeting);
                     this.newMeeting = {};
-                    this.correctName = true;
+                    this.isNameCorrect = true;
                 } else {
-                    this.correctName = false;
+                    this.isNameCorrect = false;
                 }
             }
         }

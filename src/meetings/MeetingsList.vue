@@ -25,8 +25,10 @@
                     <button @click="addNewParticipant(meeting.name)" v-if="!isParticipantAdded(meeting.participants)">
                         Zapisz się
                     </button>
+                    <button @click="deleteMeeting(meeting.name)" v-if="meeting.participants.length===0">
+                        Usuń puste spotkanie
+                    </button>
                 </td>
-
             </tr>
             </tbody>
         </table>
@@ -45,6 +47,9 @@
             },
             deleteParticipant(meetingName) {
                 this.$emit('deleteparticipant', meetingName);
+            },
+            deleteMeeting(meetingName){
+                this.$emit('deletemeeting', meetingName)
             },
             isParticipantAdded(participants) {
                 if (participants == null || participants.length === 0) return false;

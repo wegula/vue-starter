@@ -3,9 +3,10 @@
         <h2>Zajęcia</h2>
         <button @click="meetingForm=true" v-if="!meetingForm">Dodaj nowe spotkanie</button>
         <new-meeting-form @added="addNewMeeting($event)" v-if="meetingForm"></new-meeting-form>
-        <meetings-list :meetings="meetings" :username="username" :participants="participants"
-                       @added="addNewParticipant($event)"
+        <meetings-list :meetings="meetings" :username="username"
+                       @addparticipant="addNewParticipant($event)"
                        @deleteparticipant="deleteParticipant($event)"
+                       @deletemeeting="deleteMeeting($event)"
         ></meetings-list>
     </div>
 </template>
@@ -36,7 +37,6 @@
                         meeting.participants.push(this.username);
                     }
                 }
-                ;
             },
 
             deleteParticipant(meetingName) {
@@ -47,8 +47,15 @@
                         meeting.participants.splice(meeting.participants.indexOf(this.username));
                     }
                 }
+            },
+            deleteMeeting(meetingName) {
+                for (let i = 0; i < this.meetings.length; i++) {
+                    if (this.meetings[i].name === meetingName){
+                        this.meetings.splice(i);
+                    }
+                }
             }
-
         }
     }
+
 </script>
