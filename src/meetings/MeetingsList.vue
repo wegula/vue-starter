@@ -19,9 +19,12 @@
                     </ol>
                 </td>
                 <td>
-                        <button @click="deleteParticipant(meeting.name)">Wypisz się</button>
-                        <button @click="addNewParticipant(meeting.name)">Zapisz się</button>
-
+                    <button @click="deleteParticipant(meeting.name)" v-if="isParticipantAdded(meeting.participants)">
+                        Wypisz się
+                    </button>
+                    <button @click="addNewParticipant(meeting.name)" v-if="!isParticipantAdded(meeting.participants)">
+                        Zapisz się
+                    </button>
                 </td>
 
             </tr>
@@ -42,6 +45,10 @@
             },
             deleteParticipant(meetingName) {
                 this.$emit('deleteparticipant', meetingName);
+            },
+            isParticipantAdded(participants) {
+                if (participants == null || participants.length === 0) return false;
+                return participants.includes(this.username);
             }
         }
     }

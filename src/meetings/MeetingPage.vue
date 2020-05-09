@@ -1,9 +1,12 @@
 <template>
     <div>
         <h2>Zajęcia</h2>
-        <new-meeting-form @added="addNewMeeting($event)"></new-meeting-form>
+        <button @click="meetingForm=true" v-if="!meetingForm">Dodaj nowe spotkanie</button>
+        <new-meeting-form @added="addNewMeeting($event)" v-if="meetingForm"></new-meeting-form>
         <meetings-list :meetings="meetings" :username="username" :participants="participants"
-                       @added="addNewParticipant($event)"></meetings-list>
+                       @added="addNewParticipant($event)"
+                       @deleteparticipant="deleteParticipant($event)"
+        ></meetings-list>
     </div>
 </template>
 
@@ -17,11 +20,13 @@
         data() {
             return {
                 meetings: [],
+                meetingForm: false,
             };
         },
         methods: {
             addNewMeeting(meeting) {
                 this.meetings.push(meeting);
+                this.meetingForm = false;
             },
             addNewParticipant(meetingName) {
                 let meeting;
@@ -30,13 +35,16 @@
                     if (meeting.name === meetingName) {
                         meeting.participants.push(this.username);
                     }
-                };
+                }
+                ;
             },
 
             deleteParticipant(meetingName) {
+                let meeting;
                 for (let i = 0; i < this.meetings.length; i++) {
-                    if (this.meetings[i].name === meetingName) {
-                        this.meetings.splice(i, 1);
+                    meeting = this.meetings[i];
+                    if (meeting.name === meetingName) {
+                        meeting.participants.splice(meeting.participants.indexOf(this.username));
                     }
                 }
             }
