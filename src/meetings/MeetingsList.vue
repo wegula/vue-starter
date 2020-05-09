@@ -18,7 +18,12 @@
                 </ol>
             </td>
             <td>
-                <button></button>
+                <div v-if="meeting.participants.length > 0">
+                    <button @click="deleteParticipant(meeting)">Wypisz się</button>
+                </div>
+                <div v-else>
+                    <button @click="addNewParticipant(meeting)">Zapisz się</button>
+                </div>
             </td>
 
         </tr>
@@ -28,6 +33,14 @@
 
 <script>
     export default {
-        props: ['meetings']
+        props: ['meetings', 'username'],
+        methods: {
+            addNewParticipant(meeting) {
+                this.$emit('addparticipant', this.username, meeting);
+            },
+            deleteParticipant(meeting) {
+                this.$emit('deleteparticipant', this.username, meeting);
+            }
+        }
     }
-</script>
+</script>>
