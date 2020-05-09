@@ -21,15 +21,24 @@
         },
         methods: {
             addNewMeeting(meeting) {
-                meeting.participants=[];
                 this.meetings.push(meeting);
             },
-            addNewParticipant(username) {
-                this.participants.push(username);
+            addNewParticipant(meetingName) {
+                let meeting;
+                for (let i = 0; i < this.meetings.length; i++) {
+                    meeting = this.meetings[i];
+                    if (meeting.name === meetingName) {
+                        meeting.participants.push(this.username);
+                    }
+                };
             },
 
-            deleteParticipant(username) {
-                this.participants.delete(username);
+            deleteParticipant(meetingName) {
+                for (let i = 0; i < this.meetings.length; i++) {
+                    if (this.meetings[i].name === meetingName) {
+                        this.meetings.splice(i, 1);
+                    }
+                }
             }
 
         }

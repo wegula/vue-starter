@@ -19,10 +19,10 @@
             </td>
             <td>
                 <div v-if="meeting.participants.length > 0">
-                    <button @click="deleteParticipant(meeting)">Wypisz się</button>
+                    <button @click="deleteParticipant(meeting.name)">Wypisz się</button>
                 </div>
                 <div v-else>
-                    <button @click="addNewParticipant(meeting)">Zapisz się</button>
+                    <button @click="addNewParticipant(meeting.name)">Zapisz się</button>
                 </div>
             </td>
 
@@ -35,12 +35,15 @@
     export default {
         props: ['meetings', 'username'],
         methods: {
-            addNewParticipant(meeting) {
-                this.$emit('addparticipant', this.username, meeting);
+            addNewParticipant(meetingName) {
+                this.$emit('addparticipant', this.username, meetingName);
             },
-            deleteParticipant(meeting) {
-                this.$emit('deleteparticipant', this.username, meeting);
+            deleteParticipant(meetingName) {
+                this.$emit('deleteparticipant', this.username, meetingName);
             }
         }
     }
 </script>>
+
+<style scoped>
+</style>
